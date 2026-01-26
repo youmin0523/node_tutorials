@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 
 app.get('/', (request, response) => {
-  response.send('Hello Node !!!!');
+  response.send('Hello Node !!!');
 });
 
 app.listen(process.env.PORT, () => {
