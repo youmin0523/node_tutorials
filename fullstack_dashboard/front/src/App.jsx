@@ -18,22 +18,7 @@ function App() {
 
   console.log(data);
 
-  return (
-    <>
-      <h2>Data From Server</h2>
-
-      {data.map((datum, idx) => (
-        <div key={idx}>
-          <p>
-            Month: {datum.month}&nbsp;New_Customer: {datum.new_customer}
-            &nbsp; Loyal_Customer: {
-              datum.loyal_customer
-            }&nbsp;Unique_Customer: {datum.unique_customer}
-          </p>
-        </div>
-      ))}
-    </>
-  );
+  return <></>;
 }
 
 export default App;
