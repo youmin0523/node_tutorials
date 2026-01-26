@@ -32,3 +32,4 @@ WHERE id=2;
 DELETE FROM users 
 WHERE id=2; -- DELETE는 꼭 WHERE절을 사용해야함
 
+SELECT * FROM users;
