@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { REST_COUNTRIES_API_URL } from '../../constants/apiUrls';
 import { Icons } from '../../assets/icons';
 import axios from 'axios';
@@ -9,7 +9,35 @@ const AppbarLang = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [isDroplistEnabled, setIsDroplistEnabled] = useState(false);
 
+  const countryLangRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        countryLangRef.current &&
+        !countryLangRef.current.contains(e.target)
+      ) {
+        setIsDroplistEnabled(false);
+      }
+    };
+
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
+  console.log();
+
   const handleDroplistEnable = () => setIsDroplistEnabled(!isDroplistEnabled);
+
+  const countrySelectedHandler = (country, flag, lang) => {
+    setSelectedCountry({
+      country: country,
+      flag: flag,
+      language: lang,
+    });
+    setIsDroplistEnabled(false);
+  };
 
   useEffect(() => {
     const fetchCountryData = async () => {
@@ -37,10 +65,6 @@ const AppbarLang = () => {
     fetchCountryData();
   }, []);
 
-  // countries.map((a) => {
-  //   console.log(a)
-  // })
-
   return (
     <div className="appbar-dropdown relative w-30 h-10 mx-7">
       <div
@@ -54,7 +78,7 @@ const AppbarLang = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="drop-selected-text flex items-center gap-x-2">
+        <div className="drop-selected-text flex items-center gap-x-2 uppercase">
           <span>{selectedCountry?.language}</span>
           <img
             src={Icons.ChevronDownDark}
@@ -74,11 +98,27 @@ const AppbarLang = () => {
                 const langKey = Object.keys(country.languages)[0];
 
                 return (
-                  <div key={country.name.common}>
-                    <span>
-                      <img src={country.flags.png} alt="" />
+                  <div
+                    key={country.name.common}
+                    className="drop-item flex items-center gap-x-3 cursor-pointer dark:text-white py-1 px-0 delay-300 ease-in-out transition hover:dark:bg-gray-700 hover:bg-slate-100"
+                    onClick={() => {
+                      countrySelectedHandler(
+                        country?.name?.common,
+                        country?.flags.png,
+                        langKey,
+                      );
+                    }}
+                  >
+                    <span className="drop-item-img w-4 h-4 min-w-4 overflow-hidden rounded-full">
+                      <img
+                        src={country.flags.png}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
                     </span>
-                    <span>{langKey}</span>
+                    <span className="drop-item-text text-sm uppercase font-medium">
+                      {langKey}
+                    </span>
                   </div>
                 );
               } else {
