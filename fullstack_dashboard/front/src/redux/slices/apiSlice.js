@@ -12,9 +12,16 @@ const createFetchThunk = (actionType, apiURL) => {
   });
 };
 
+// Get Visitors
 export const fetchVisitors = createFetchThunk(
   'fetchVisitors',
   GET_VISITORS_API_URL,
+);
+
+// Get Revenue
+export const fetchRevenue = createFetchThunk(
+  'fetchRevenue',
+  GET_REVENUE_API_URL,
 );
 
 const handleFulfilled = (stateKey) => (state, action) => {
@@ -30,10 +37,16 @@ const apisSlice = createSlice({
   name: 'apis',
   initialState: {
     visitorsData: null,
+    revenueData: null,
+    isError: false,
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchVisitors.fulfilled, handleFulfilled('visitorsData'))
-      .addCase(fetchVisitors.rejected, handleRejected);
+      .addCase(fetchVisitors.rejected, handleRejected)
+      .addCase(fetchRevenue.fulfilled, handleFulfilled('revenueData'))
+      .addCase(fetchRevenue.rejected, handleRejected);
   },
 });
+
+export default apisSlice.reducer;
