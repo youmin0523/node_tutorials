@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
   GET_VISITORS_API_URL,
   GET_REVENUE_API_URL,
+  GET_CUSTOMERS_API_URL,
 } from '../../constants/apiUrls';
 import { getRequest } from '../../constants/requestMethods';
 
@@ -24,6 +25,12 @@ export const fetchRevenue = createFetchThunk(
   GET_REVENUE_API_URL,
 );
 
+// Get Customers
+export const fetchCustomer = createFetchThunk(
+  'fetchCustomer',
+  GET_CUSTOMERS_API_URL,
+);
+
 const handleFulfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
 };
@@ -38,6 +45,7 @@ const apisSlice = createSlice({
   initialState: {
     visitorsData: null,
     revenueData: null,
+    customerData: null,
     isError: false,
   },
   extraReducers: (builder) => {
@@ -45,7 +53,9 @@ const apisSlice = createSlice({
       .addCase(fetchVisitors.fulfilled, handleFulfilled('visitorsData'))
       .addCase(fetchVisitors.rejected, handleRejected)
       .addCase(fetchRevenue.fulfilled, handleFulfilled('revenueData'))
-      .addCase(fetchRevenue.rejected, handleRejected);
+      .addCase(fetchRevenue.rejected, handleRejected)
+      .addCase(fetchCustomer.fulfilled, handleFulfilled('customerData'))
+      .addCase(fetchCustomer.rejected, handleRejected);
   },
 });
 

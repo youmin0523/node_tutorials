@@ -10,18 +10,19 @@ const AppbarLang = () => {
   const [isDroplistEnabled, setIsDroplistEnabled] = useState(false);
 
   const countryLangRef = useRef(null);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        countryLangRef.current &&
-        !countryLangRef.current.contains(e.target)
-      ) {
+      // ref 안에 클릭이 포함되어 있지 않으면 닫기
+      console.log(e.target);
+      if (!countryLangRef.current.contains(e.target)) {
         setIsDroplistEnabled(false);
       }
     };
 
     window.addEventListener('click', handleClickOutside);
     return () => {
+      // Cleanup function
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
@@ -66,7 +67,10 @@ const AppbarLang = () => {
   }, []);
 
   return (
-    <div className="appbar-dropdown relative w-30 h-10 mx-7">
+    <div
+      ref={countryLangRef}
+      className="appbar-dropdown relative w-30 h-10 mx-7"
+    >
       <div
         className="drop-selected flex items-center w-full h-full gap-x-3 px-1 py-3 cursor-pointer"
         onClick={handleDroplistEnable}
