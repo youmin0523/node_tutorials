@@ -10,6 +10,26 @@ import {
   Tooltip,
 } from 'recharts';
 
+const formatTooltipValue = (value, name) => {
+  return `${value.replace('_', ' ')} : ${name}`;
+};
+
+const CustomTooltipContent = ({ payload }) => {
+  if (!payload || !payload.length) return null;
+  return (
+    <div className="custom-recharts-tooltip">
+      <p className="recharts-tooltip-label">{payload[0].payload?.month}</p>
+      <ul className="recharts-tooltip-item-list">
+        {payload?.map((item, index) => {
+          return (
+            <li key={index}>{formatTooltipValue(item.name, item.value)}</li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+
 const Customers = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.apis.customerData);
@@ -51,7 +71,7 @@ const Customers = () => {
               bottom: 0,
             }}
           >
-            <Tooltip />
+            <Tooltip content={<CustomTooltipContent />} />
             <Legend formatter={formatLegendValue} />
 
             <defs>

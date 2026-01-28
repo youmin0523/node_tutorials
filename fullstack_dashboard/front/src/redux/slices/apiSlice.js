@@ -3,6 +3,8 @@ import {
   GET_VISITORS_API_URL,
   GET_REVENUE_API_URL,
   GET_CUSTOMERS_API_URL,
+  GET_TARGETREALITY_API_URL,
+  GET_TOP_PRODUCTS_API_URL,
 } from '../../constants/apiUrls';
 import { getRequest } from '../../constants/requestMethods';
 
@@ -31,6 +33,18 @@ export const fetchCustomer = createFetchThunk(
   GET_CUSTOMERS_API_URL,
 );
 
+// Get Target Reality
+export const fetchTargetReality = createFetchThunk(
+  'fetchTargetReality',
+  GET_TARGETREALITY_API_URL,
+);
+
+// Get Top Products
+export const fetchTopProducts = createFetchThunk(
+  'fetchTopProducts',
+  GET_TOP_PRODUCTS_API_URL,
+);
+
 const handleFulfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
 };
@@ -46,6 +60,8 @@ const apisSlice = createSlice({
     visitorsData: null,
     revenueData: null,
     customerData: null,
+    targetRealityData: null,
+    topProductsData: null,
     isError: false,
   },
   extraReducers: (builder) => {
@@ -55,7 +71,14 @@ const apisSlice = createSlice({
       .addCase(fetchRevenue.fulfilled, handleFulfilled('revenueData'))
       .addCase(fetchRevenue.rejected, handleRejected)
       .addCase(fetchCustomer.fulfilled, handleFulfilled('customerData'))
-      .addCase(fetchCustomer.rejected, handleRejected);
+      .addCase(fetchCustomer.rejected, handleRejected)
+      .addCase(
+        fetchTargetReality.fulfilled,
+        handleFulfilled('targetRealityData'),
+      )
+      .addCase(fetchTargetReality.rejected, handleRejected)
+      .addCase(fetchTopProducts.fulfilled, handleFulfilled('topProductsData'))
+      .addCase(fetchTopProducts.rejected, handleRejected);
   },
 });
 

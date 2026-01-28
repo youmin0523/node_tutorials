@@ -3,6 +3,8 @@ import Sales from './Sales';
 import Visitors from './Visitors';
 import TotalRevenue from './TotalRevenue';
 import Customers from './Customers';
+import TargetReality from './TargetReality';
+import TopProducts from './TopProducts';
 
 const DashboardScreen = () => {
   return (
@@ -14,6 +16,8 @@ const DashboardScreen = () => {
       <div className="grid grid-cols-[3fr_2fr_2fr]">
         <TotalRevenue />
         <Customers />
+        <TargetReality />
+        <TopProducts />
       </div>
     </div>
   );

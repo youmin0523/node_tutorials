@@ -18,7 +18,7 @@ const formatLegendValue = (value) => {
 };
 
 const formatTooltipValue = (value, name) => {
-  return `${value.replace('_', '')} : ${name}`;
+  return `${value.replace('_', ' ')} : ${name}`;
 };
 
 const CumstomTooltipContent = ({ payload }) => {
