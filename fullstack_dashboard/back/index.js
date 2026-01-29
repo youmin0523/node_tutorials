@@ -19,6 +19,7 @@ app.use(require('./routes/customerRoute'));
 app.use(require('./routes/targetRealityRoute'));
 app.use(require('./routes/topProductsRoute'));
 app.use(require('./routes/salesMapRoute'));
+app.use(require('./routes/volumeServiceRoute'));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${process.env.PORT} `);

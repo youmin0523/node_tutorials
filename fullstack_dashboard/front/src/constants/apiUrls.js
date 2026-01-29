@@ -9,6 +9,7 @@ const GET_CUSTOMERS_API_URL = `${domain}/customers`;
 const GET_TARGETREALITY_API_URL = `${domain}/target_reality`;
 const GET_TOP_PRODUCTS_API_URL = `${domain}/top_products`;
 const GET_SALES_MAP_API_URL = `${domain}/sales_map`;
+const GET_VOLUME_SERVICES_API_URL = `${domain}/volume_services`;
 
 export {
   GET_VISITORS_API_URL,
@@ -18,4 +19,5 @@ export {
   GET_TARGETREALITY_API_URL,
   GET_TOP_PRODUCTS_API_URL,
   GET_SALES_MAP_API_URL,
+  GET_VOLUME_SERVICES_API_URL,
 };
