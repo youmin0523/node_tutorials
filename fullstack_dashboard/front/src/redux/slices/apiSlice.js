@@ -5,6 +5,8 @@ import {
   GET_CUSTOMERS_API_URL,
   GET_TARGETREALITY_API_URL,
   GET_TOP_PRODUCTS_API_URL,
+  GET_SALES_MAP_API_URL,
+  GET_VOLUME_SERVICES_API_URL,
 } from '../../constants/apiUrls';
 import { getRequest } from '../../constants/requestMethods';
 
@@ -45,6 +47,18 @@ export const fetchTopProducts = createFetchThunk(
   GET_TOP_PRODUCTS_API_URL,
 );
 
+// Get Sales Map
+export const fetchSalesMap = createFetchThunk(
+  'fetchSalesMap',
+  GET_SALES_MAP_API_URL,
+);
+
+// Get Volume Services
+export const fetchVolumeServices = createFetchThunk(
+  'fetchVolumeServices',
+  GET_VOLUME_SERVICES_API_URL,
+);
+
 const handleFulfilled = (stateKey) => (state, action) => {
   state[stateKey] = action.payload;
 };
@@ -62,23 +76,38 @@ const apisSlice = createSlice({
     customerData: null,
     targetRealityData: null,
     topProductsData: null,
+    salesMapData: null,
+    volumeServicesData: null,
     isError: false,
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchVisitors.fulfilled, handleFulfilled('visitorsData'))
       .addCase(fetchVisitors.rejected, handleRejected)
+
       .addCase(fetchRevenue.fulfilled, handleFulfilled('revenueData'))
       .addCase(fetchRevenue.rejected, handleRejected)
+
       .addCase(fetchCustomer.fulfilled, handleFulfilled('customerData'))
       .addCase(fetchCustomer.rejected, handleRejected)
+
       .addCase(
         fetchTargetReality.fulfilled,
         handleFulfilled('targetRealityData'),
       )
       .addCase(fetchTargetReality.rejected, handleRejected)
+
       .addCase(fetchTopProducts.fulfilled, handleFulfilled('topProductsData'))
-      .addCase(fetchTopProducts.rejected, handleRejected);
+      .addCase(fetchTopProducts.rejected, handleRejected)
+
+      .addCase(fetchSalesMap.fulfilled, handleFulfilled('salesMapData'))
+      .addCase(fetchSalesMap.rejected, handleRejected)
+
+      .addCase(
+        fetchVolumeServices.fulfilled,
+        handleFulfilled('volumeServicesData'),
+      )
+      .addCase(fetchVolumeServices.rejected, handleRejected);
   },
 });
 
