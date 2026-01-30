@@ -23,6 +23,17 @@ const TargetReality = () => {
   }, [dispatch]);
 
   // console.log(state);
+
+  // //! [Original Code] 기존에는 별도의 합계 계산 로직이 없었음
+  // (없음)
+
+  // //* [Modified Code] API 데이터로부터 Reality와 Target의 총합을 계산하는 로직 추가
+  const totalReality =
+    state?.reduce((accumulator, current) => accumulator + current.reality, 0) ||
+    0;
+  const totalTarget =
+    state?.reduce((accumulator, current) => accumulator + current.target, 0) ||
+    0;
   return (
     <div className="block-wrap mt-[14px] ml-[14px]">
       <HeadTitle title="Target vs Reality" />
@@ -80,7 +91,8 @@ const TargetReality = () => {
 
       <div className="block-foot">
         <div className="legend-info mt-4">
-          {TARGET_REALITY_LISTS.map((item, index) => (
+          {/* //! [Original Code] 고정된 메뉴 리스트의 값을 그대로 사용하여 렌더링 */}
+          {/* {TARGET_REALITY_LISTS.map((item, index) => (
             <div key={index} className="mt-4 flex items-center justify-between">
               <div className="flex items-center gap-x-2.5">
                 <div
@@ -104,6 +116,36 @@ const TargetReality = () => {
                   }`}
                 >
                   {item.value}
+                </p>
+              </div>
+            </div>
+          ))} */}
+
+          {/* //* [Modified Code] 계산된 totalReality와 totalTarget 값을 사용하여 동적으로 데이터 렌더링 */}
+          {TARGET_REALITY_LISTS.map((item, index) => (
+            <div key={index} className="mt-4 flex items-center justify-between">
+              <div className="flex items-center gap-x-2.5">
+                <div
+                  className={`w-10 h-10 rounded-sm flex place-content-center ${index === 0 ? 'bg-[#e2fff3]' : 'bg-[#fff4de]'}`}
+                >
+                  <img src={item.icon} alt={item.title} className="w-6" />
+                </div>
+                <div>
+                  <h4 className="text-xs text-[#151d48] dark:text-gray-300">
+                    {item.title}
+                  </h4>
+                  <p className="text-[10px] text-[#a5aea3] dark:text-gray-500">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p
+                  className={`font-semibold dark:text-gray-300 ${
+                    index === 0 ? 'text-[#00e096]' : 'text-[#ffa412]'
+                  }`}
+                >
+                  {index === 0 ? totalReality : totalTarget}
                 </p>
               </div>
             </div>

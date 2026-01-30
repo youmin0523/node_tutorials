@@ -9,8 +9,11 @@ import SalesMap from './SalesMap';
 import VolumeServices from './VolumeServices';
 
 const DashboardScreen = () => {
+  // //* [Modified Code] w-full 사용 (부모의 패딩에 맞춰 자동으로 채움)
   return (
-    <div className="w-[calc(80%-28px)] ml-[calc(20%+14px)] mt-[14px]">
+    // //! [Original Code] calc() 사용한 복잡한 여백 계산 (주석 처리됨)
+    // <div className="w-[calc(80%-28px)] ml-[calc(20%+14px)] mt-[14px]">
+    <div className="w-full">
       <div className="grid grid-cols-[4fr_3fr] gap-x-[14px]">
         <Sales />
         <Visitors />
