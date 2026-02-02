@@ -5,6 +5,7 @@ import { MENU_LISTS, routes } from '../../constants/menuList';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSidebarOpen } from '../../redux/slices/sidebarSlice';
+import { useEffect } from 'react';
 
 const Sidebar = () => {
   const [currentTab, clickedTab] = useState(0);
@@ -17,6 +18,7 @@ const Sidebar = () => {
   const selectMenuHandler = (index) => {
     clickedTab(index);
   };
+
   return (
     <div
       // //! [Original Code] 고정된 위치, 애니메이션 없음 (주석 처리됨)

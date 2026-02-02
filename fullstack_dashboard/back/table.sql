@@ -20,7 +20,7 @@ INSERT INTO visitors (month, new_customer, loyal_customer, unique_customer) VALU
 ('Sept', 180, 330, 160),
 ('Oct', 160, 180, 170),
 ('Nov', 140, 220, 150),
-('Dec', 120, 70, 130);
+('Dec', 120, 70, 130),
 
 
 CREATE TABLE revenue(
@@ -36,11 +36,11 @@ INSERT INTO revenue (day, online, offline)
 VALUES 
 ('Mon', 14, 12.5),
 ('Tue', 17, 12),
-('Wen', 6, 23),
+('Wed', 6, 23),
 ('Thu', 16, 7),
 ('Fri', 13, 12),
 ('Sat', 17, 13),
-('Sun', 21, 12)
+('Sun', 21, 12),
 
 
 CREATE TABLE customers(
@@ -54,7 +54,7 @@ CREATE TABLE customers(
 
 INSERT INTO customers (month, last_month, this_month) VALUES
 ('Jan', 400, 240),
-('Fab', 300, 139),
+('Feb', 300, 139),
 ('Mar', 400, 180),
 ('Apr', 278, 190),
 ('May', 189, 480),
@@ -79,7 +79,7 @@ VALUES
 ('Apr', 60, 70),
 ('May', 100, 75),
 ('Jun', 100, 75),
-('Jul', 100, 75);
+('Jul', 100, 75),
 
 
 CREATE TABLE top_products(
@@ -118,7 +118,7 @@ INSERT INTO sales_map (country_id, country_name, fill_color) VALUES
 ('356', 'India', 'dodgerBlue'),
 ('036', 'Australia', 'red'),
 ('124', 'Canada', 'dodgerBlue'),
-('634', 'Quatar', 'emerald');
+('634', 'Quatar', 'emerald'),
 
 
 CREATE TABLE volume_services(
@@ -137,4 +137,4 @@ INSERT INTO volume_services (name, volume, services) VALUES
 ('D', 278, 390),
 ('E', 189, 480),
 ('F', 239, 380),
-('G', 349, 430);
+('G', 349, 430),
