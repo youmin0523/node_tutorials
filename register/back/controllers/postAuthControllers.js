@@ -75,6 +75,8 @@ exports.postLogin = async (request, response) => {
   // 2. 비밀번호 일치 확인
   // 3. 회원정보 암호화하여 반환 (jwt)
 
+  console.log(process.env.JWT_SECRET);
+
   try {
     const rows = await database.pool.query(
       'SELECT * FROM users WHERE email = $1',
@@ -87,7 +89,7 @@ exports.postLogin = async (request, response) => {
         .json({ message: '존재하지 않는 이메일입니다.', success: false });
     }
 
-    const isMatch = await bcrypt.compareSync(password, rows.rows[0].password);
+    const isMatch = await bcrypt.compare(password, rows.rows[0].password);
 
     if (!isMatch) {
       return response
@@ -96,18 +98,24 @@ exports.postLogin = async (request, response) => {
     }
 
     const token = jwt.sign(
-      { email: rows.rows[0].email, id: rows.rows[0].id },
+      // 파라미터 순서 유지
+      {
+        id: rows.rows[0].id,
+        username: rows.rows[0].username,
+        email: rows.rows[0].email,
+        profile_image: rows.rows[0].profile_image,
+      },
       process.env.JWT_SECRET,
       {
-        expiresIn: '1d',
+        expiresIn: '3h',
       },
     );
 
-    return response.status(200).json({
-      message: '로그인 성공',
-      success: true,
+    return response.status(201).json({
       token,
-      user: rows.rows[0],
+      success: true,
+      // message: '로그인 성공',
+      // user: rows.rows[0],
     });
   } catch (error) {
     return response
